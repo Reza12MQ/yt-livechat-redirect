@@ -1,3 +1,7 @@
+<?php
+ob_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +36,7 @@ function getVideoId($channel) {
 
 // redirect to yt live chat page
 function redirect($videoId) {
+    ob_end_clean();
     header('Location: https://www.youtube.com/live_chat?v='.$videoId);
     exit();
 }
