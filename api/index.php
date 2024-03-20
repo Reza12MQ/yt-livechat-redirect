@@ -51,7 +51,7 @@ function userInput() {
     <input type="submit">
 </form>
 <p>
-    Or set directly using: yt-livechat-redirect.vercel.app/?channel=<strong>Channel-Handler</strong>
+    Or set directly using: yt-livechat-redirect.vercel.app?channel=<strong>Channel-Handler</strong>
 </p>
 <a href="https://support.google.com/youtube/answer/11585688" target="_blank">What is channel handler?</a>
 
