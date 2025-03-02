@@ -24,7 +24,12 @@ function getVideoId($channel) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    $videoContent = curl_exec($curl);
+    if (curl_exec($curl) === false) {
+        die("curl fail: ".curl_error($curl));
+    }
+    else {
+        $videoContent = curl_exec($curl);
+    }
     // var_dump($videoContent);
     // echo $videoContent;
 
