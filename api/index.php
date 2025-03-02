@@ -30,6 +30,7 @@ function getVideoId($channel) {
     else {
         echo "no error";
         $videoContent = curl_exec($curl);
+        curl_getinfo($curl);
     }
     // var_dump($videoContent);
     // echo $videoContent;
