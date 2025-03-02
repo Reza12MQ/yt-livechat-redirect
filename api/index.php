@@ -31,7 +31,11 @@ function getVideoId($channel) {
     // get channel live video page
     if($videoContent) {
         // get video id
-        if(preg_match('/"videoId":"(.*?)"/', $videoContent, $matched) && preg_match('/"isLiveNow":true/', $videoContent)) {
+        $is_videoId = preg_match('/"videoId":"(.*?)"/', $videoContent, $matched);
+        $is_videoContent = preg_match('/"isLiveNow":true/', $videoContent);
+        var_dump($is_videoId);
+        var_dump($is_videoContent);
+        if($is_videoId && $is_videoContent) {
             $videoId = $matched[1];
             var_dump($matched);
         }
