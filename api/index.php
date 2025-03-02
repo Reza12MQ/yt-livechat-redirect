@@ -25,6 +25,7 @@ function getVideoId($channel) {
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     $videoContent = curl_exec($curl);
+    var_dump($videoContent);
     
     // $videoContent = @file_get_contents('https://www.youtube.com/@'.$channel.'/live')
     if(preg_match ('/"channelId":"(.*?)"/', $videoContent)) {
@@ -38,7 +39,7 @@ function getVideoId($channel) {
         }
     }
     else {
-        throw new Exception("Channel @$channel not found");
+        throw new Exception(curl_error($curl));
     }
     curl_close($curl);
 
