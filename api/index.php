@@ -19,9 +19,11 @@ function getVideoId($channel) {
 
     // get channel live video page
     if($videoContent = @file_get_contents('https://www.youtube.com/@'.$channel.'/live')) {
+        echo $videoContent;
         // get video id
         if(preg_match('/"videoId":"(.*?)"/', $videoContent, $matched) && preg_match('/"isLiveNow":true/', $videoContent)) {
             $videoId = $matched[1];
+            var_dump($matched);
         }
         else {
             throw new Exception("Current live video not found");
@@ -46,14 +48,14 @@ function userInput() {
 
 <!-- get channel from user input -->
 <form method="GET">
-    <label>YT Channel Handler (without @):</label>
+    <label>YT Channel Handle (without @):</label>
     <input type="text" name="channel">
     <input type="submit">
 </form>
 <p>
-    Or set directly using: yt-livechat-redirect.vercel.app?channel=<strong>Channel-Handler</strong>
+    Or set directly using: yt-livechat-redirect.vercel.app?channel=<strong>Channel-Handle</strong>
 </p>
-<a href="https://support.google.com/youtube/answer/11585688" target="_blank">What is channel handler?</a>
+<a href="https://support.google.com/youtube/answer/11585688" target="_blank">What is channel handle?</a>
 
 <?php
 }
@@ -61,7 +63,7 @@ function userInput() {
 try {
     if(isset($_GET['channel']) && $_GET['channel']!='') {
         $videoId = getVideoId($_GET['channel']);
-        redirect($videoId);
+        // redirect($videoId);
     }
     else {
         userInput();
