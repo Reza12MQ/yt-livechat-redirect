@@ -28,9 +28,8 @@ function getVideoId($channel) {
         die("curl fail: ".curl_error($curl));
     }
     else {
-        echo "no error";
         $videoContent = curl_exec($curl);
-        curl_getinfo($curl);
+        var_dump(curl_getinfo($curl));
     }
     // var_dump($videoContent);
     // echo $videoContent;
@@ -40,12 +39,12 @@ function getVideoId($channel) {
         // get video id
         $is_videoId = preg_match('/"videoId":"(.*?)"/', $videoContent, $matched);
         $is_videoContent = preg_match('/"isLiveNow":true/', $videoContent, $match_live);
-        var_dump($is_videoId);
-        var_dump($is_videoContent);
+        // var_dump($is_videoId);
+        // var_dump($is_videoContent);
         if($is_videoId && $is_videoContent) {
             $videoId = $matched[1];
-            var_dump($matched);
-            var_dump($match_live);
+            // var_dump($matched);
+            // var_dump($match_live);
         }
         else {
             throw new Exception("Current live video not found");
