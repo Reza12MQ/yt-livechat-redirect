@@ -17,9 +17,17 @@ function getVideoId($channel) {
     // replace if containing @
     $channel = str_replace('@', '', $channel);
 
-    // get channel live video page
-    if($videoContent = @file_get_contents('https://www.youtube.com/@'.$channel.'/live')) {
-        echo $videoContent;
+    // get channel live video page danielbong6856
+    $url = 'https://www.youtube.com/@'.$channel.'/live';
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    $videoContent = curl_exec($curl);
+    
+    // $videoContent = @file_get_contents('https://www.youtube.com/@'.$channel.'/live')
+    if(preg_match ('/"channelId":"(.*?)"/', $videoContent)) {
         // get video id
         if(preg_match('/"videoId":"(.*?)"/', $videoContent, $matched) && preg_match('/"isLiveNow":true/', $videoContent)) {
             $videoId = $matched[1];
@@ -30,8 +38,9 @@ function getVideoId($channel) {
         }
     }
     else {
-        throw new Exception("Channel not found");
+        throw new Exception("Channel @$channel not found");
     }
+    curl_close($curl);
 
     return $videoId;
 }
@@ -63,7 +72,7 @@ function userInput() {
 try {
     if(isset($_GET['channel']) && $_GET['channel']!='') {
         $videoId = getVideoId($_GET['channel']);
-        // redirect($videoId);
+        redirect($videoId);
     }
     else {
         userInput();
