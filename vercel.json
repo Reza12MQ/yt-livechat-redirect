@@ -6,10 +6,5 @@
   },
   "routes": [
     { "src": "/(.*)",  "dest": "/api/index.php" }
-  ],
-  "build": {
-    "env": {
-      "NODE_VERSION": "18.x"
-    }
-  }
+  ]
 }
