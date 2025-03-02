@@ -18,7 +18,7 @@ function getVideoId($channel) {
     $channel = str_replace('@', '', $channel);
 
     // get channel live video page danielbong6856
-    $url = 'https://www.youtube.com/@'.$channel.'/live';
+    $url = 'https://www.youtube.com'.$channel.'/lives';
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -38,7 +38,7 @@ function getVideoId($channel) {
         }
     }
     else {
-        throw new Exception("Channel @$channel not found");
+        throw new Exception(curl_error($curl));
     }
     curl_close($curl);
 
