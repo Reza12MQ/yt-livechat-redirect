@@ -18,7 +18,7 @@ function getVideoId($channel) {
     $channel = str_replace('@', '', $channel);
 
     // get channel live video page danielbong6856
-    $url = 'https://www.youtube.com'.$channel.'/lives';
+    $url = 'https://www.youtube.com/@'.$channel.'/lives';
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
