@@ -28,6 +28,7 @@ function getVideoId($channel) {
         die("curl fail: ".curl_error($curl));
     }
     else {
+        echo "no error";
         $videoContent = curl_exec($curl);
     }
     // var_dump($videoContent);
